@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+<style>
+#news{
+	border:1px solid red;
+	width:400px;
+	height:300px;
+}
+</style>
+</head>
+<body>
+
+<div id="news"></div>
+<button id="sport">Load Sport news</button>
+<button id="politics">Load Politics news</button>
+<button id="bussiness">Load Bussiness news</button>
+
+
+<script>
+	var buttons=document.querySelectorAll("button");
+	for(i=0;i<buttons.length;i++){
+		buttons[i].addEventListener('click',f);
+	}
+	function f(){
+		document.querySelector("#news").innerHTML="";
+		var news=document.getElementById("#news");
+		var paragr=document.createElement("P")
+		var h1=document.createElement("h1");
+		var t;
+		var text;
+		if(this.getAttribute("id")=="bussiness"){
+			text=document.createTextNode("Dow Jones index has fallen, because of prices for petrol");
+			t=document.createTextNode("Dow Jones index has fallen");
+		}
+		else if(this.getAttribute("id")=="politics"){
+			text=document.createTextNode("Trump started his foreign tour by visiting UK");
+			t=document.createTextNode("Trump visited UK");
+		}
+		else{
+			text=document.createTextNode("Messi scored 5 goals in last match and became top-scorer of the league");
+			t=document.createTextNode("Messi scored 5 goals");
+		}
+		paragr.appendChild(text);
+		h1.appendChild(t);
+		document.querySelector("#news").appendChild(h1);
+		document.querySelector("#news").appendChild(paragr);
+		
+	}
+</script>
+</body>
+</html>
