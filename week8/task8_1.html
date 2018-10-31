@@ -17,7 +17,19 @@
 
 
 <script>
+	
 	var buttons=document.querySelectorAll("button");
+	var butinf = JSON.stringify([
+		{"button":buttons[0].getAttribute('id'),
+		"info":["Messi scored 5 goals","Messi scored 5 goals in last match and became top-scorer of the league"]},
+
+		{"button":buttons[1].getAttribute('id'),
+		"info":["Trump visited UK","Trump started his foreign tour by visiting UK"]},
+		
+		{"button":buttons[2].getAttribute('id'),
+		"info":["Dow Jones index has fallen","Dow Jones index has fallen, because of prices for petrol"]
+	}]);
+	var obj=JSON.parse(butinf);
 	for(i=0;i<buttons.length;i++){
 		buttons[i].addEventListener('click',f);
 	}
@@ -28,17 +40,17 @@
 		var h1=document.createElement("h1");
 		var t;
 		var text;
-		if(this.getAttribute("id")=="bussiness"){
-			text=document.createTextNode("Dow Jones index has fallen, because of prices for petrol");
-			t=document.createTextNode("Dow Jones index has fallen");
+		if(this.getAttribute("id")==obj[0]['button']){
+			t=document.createTextNode(obj[0]['info'][0]);
+			text=document.createTextNode(obj[0]['info'][1]);
 		}
-		else if(this.getAttribute("id")=="politics"){
-			text=document.createTextNode("Trump started his foreign tour by visiting UK");
-			t=document.createTextNode("Trump visited UK");
+		else if(this.getAttribute("id")==obj[1]['button']){
+			t=document.createTextNode(obj[1]['info'][0]);
+			text=document.createTextNode(obj[1]['info'][1]);
 		}
 		else{
-			text=document.createTextNode("Messi scored 5 goals in last match and became top-scorer of the league");
-			t=document.createTextNode("Messi scored 5 goals");
+			t=document.createTextNode(obj[2]['info'][0]);
+			text=document.createTextNode(obj[2]['info'][1]);
 		}
 		paragr.appendChild(text);
 		h1.appendChild(t);
