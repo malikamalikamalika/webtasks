@@ -40,17 +40,70 @@
 
 
     <script defer>
-      var buttons=document.querySelectorAll("button");
-      
-        buttons[0].addEventListener('click',load);
-      
-      function load(){
-            buttons[0].innerHTML="Loading...";
-            document.querySelector('#loading').style.display='block';  
-          //buttons[0].innerHTML="Loaded information";
-        //document.querySelector("#loading").style.display='none';
-        
-      }
+     const JSON_PATH = 'http://demo4296963.mockable.io/listCars';
+     var num=0, num1=0,num2=0;
+     function f(){
+       num=1;
+       document.getElementById('loading').style.display = 'block';
+       var button=document.querySelector('button');
+        button.innerHTML='loading...';
+        setTimeout(function(){
+        document.getElementById('loading').style.display = 'none';
+        button.innerHTML='Items are loaded';
+          fetch(JSON_PATH).then(onResponse,onError).then(onS);
+          }, 2000);
+     }
+     function fun(mass){
+       var cards=document.getElementById('cards');
+       var text=JSON.parse(mass);
+       num1=text;
+       for(var element of text){
+         var card=document.createElement('div');
+         var titlee=document.createElement('div');
+         var pricee=document.createElement('div');
+         card.classList.add('card');
+         titlee.classList.add('title');
+         pricee.classList.add('price');
+         pricee.innerHTML=element.price;
+         titlee.innerHTML=element.maker +" "+ element.model;
+
+       }
+     }
+     function fun1(elem){
+       return elem.text();
+     }
+     function fun2(elem){
+       console.log("There is an error: "+elem);
+     }
+    function sortmaker(elem,elem1){
+      return elem.maker.localeCompare(elem1.maker);
+    }
+    function sortprice(elem,elem1){
+      return elem1.price-elem.price;
+    }
+     function fun3(number){
+       if(num!=0){
+        document.getElementById('cards').innerHTML='';
+        num2=number;
+        console.log(num2);
+        if(num2==2){
+          num1.sort(sortprice);
+        }
+        else if(num2==1){
+          num1.sort(sortmaker);
+        }
+        for(var element of num1){
+          var card=document.createElement('div');
+         var titlee=document.createElement('div');
+         var pricee=document.createElement('div');
+         card.classList.add('card');
+         titlee.classList.add('title');
+         pricee.classList.add('price');
+         pricee.innerHTML=element.price;
+         titlee.innerHTML=element.maker +" "+ element.model;
+        }
+       }
+     }
 
     </script>
   </body>
